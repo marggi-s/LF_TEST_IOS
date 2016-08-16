@@ -1,7 +1,7 @@
 
 # TODO
 
-Le test a pour but de constuire une application iOS en **Objective-c** avec une **architecture propre**, compatible  **iOS 7/8** et respectant le standard **autolayout** (pas de .xib).
+Le test a pour but de constuire une application iOS en **Swift** avec une **architecture propre**, compatible  **iOS 8+** et respectant le standard **autolayout** (pas de .xib).
 L'application se compose d'une seule fiche restaurant.
 
 
@@ -23,6 +23,7 @@ L'application se compose d'une seule fiche restaurant.
 - Compatibilité iPad
 - Gestion du mode Offline
 - ¿ Apple Watch ?
+- iOS 10 !
 
 
 # BON COURAGE
