@@ -1,7 +1,7 @@
 
 # TODO
 
-Le test a pour but de constuire une application iOS en **Swift** avec une **architecture propre**, compatible  **iOS 8+** et respectant le standard **autolayout**, **sans .xib ni .storyboard** (SnapKit).
+Le test a pour but de constuire une application iOS en **Swift** avec une **architecture propre**, compatible  **iOS 9+** et respectant le standard **autolayout**, **sans .xib ni .storyboard** (Stevia).
 L'application se compose d'une seule fiche restaurant.
 
 
@@ -15,13 +15,12 @@ L'application se compose d'une seule fiche restaurant.
 ![Alt Exemple](https://github.com/pcolet/LF_TEST_IOS/blob/master/fiche-resto.jpg)
 
 
-
 ## Bonus :
 
+- Test unitaires
+- Tests fonctionnels
 - Compatibilité iPad
 - Gestion du mode Offline
 - ¿ Apple Watch ?
-- iOS 10 !
-
 
 # BON COURAGE
