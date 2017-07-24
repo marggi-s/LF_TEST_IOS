@@ -11,6 +11,7 @@ import RealmSwift
 
 class AbstractEntity: Object {
     
+    // MARK: - PK
     var id = RealmOptional<Int>()
     
     override class func primaryKey() -> String {

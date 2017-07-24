@@ -10,8 +10,10 @@ import Foundation
 
 class RestaurantDetailsVo: NSObject {
     
+    // MARK: - PK
     var idRestaurant: Int? = 0
     
+    // MARK: - Field
     var name: String? = nil
     var address: String? = nil
     var city: String? = nil

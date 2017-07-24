@@ -11,3 +11,8 @@
 
 /* Service */
 "service.error.json" = "Invalid tag information received from the service";
+
+/* RestaurantDetails */
+"restaurant.information.average.price" = "Prix moyen à la carte de ce restaurant:";
+"restaurant.information.number.of.rate" = "avis LaFourchette";
+"restaurant.information.note.on.ten" = "/10";

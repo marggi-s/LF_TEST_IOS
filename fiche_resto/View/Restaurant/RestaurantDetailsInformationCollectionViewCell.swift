@@ -9,14 +9,20 @@
 import UIKit
 import Stevia
 
+protocol RestaurantDetailsInformationCollectionViewCellDelegate: class {
+    
+}
+
 class RestaurantDetailsInformationCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Attributes
     let title = UILabel()
     let address = UILabel()
     let avgRate = UILabel()
     let numberOfRate = UILabel()
     let avgPrice = UILabel()
     
+    // MARK: - Inherit
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)}
     
     override init(frame: CGRect) {
@@ -63,7 +69,7 @@ class RestaurantDetailsInformationCollectionViewCell: UICollectionViewCell {
     func avgRateStyle(label: UILabel) {
         
         label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.systemFont(ofSize: 10.0)
         label.textColor = .black
         label.textAlignment = .center
     }

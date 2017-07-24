@@ -13,7 +13,7 @@ import Foundation
  */
 struct UrlApp {
     
-    static let baseUrl = "https://api.lafourchette.com/api"
+    static let baseUrl: String = "https://api.lafourchette.com/api"
 }
 
 /**
@@ -26,10 +26,10 @@ struct CollectionCell {
         // MARK: - Restaurant
         struct Restaurant {
             
-            static let diaporamaCell = "DiaporamaCellReuseIdentifier"
-            static let informationCell = "InformationCellReuseIdentifier"
-            static let mapCell = "MapCellReuseIdentifier"
-            static let sampleCell = "MapCellReuseIdentifier"
+            static let diaporamaCell: String = "DiaporamaCellReuseIdentifier"
+            static let informationCell: String = "InformationCellReuseIdentifier"
+            static let mapCell: String = "MapCellReuseIdentifier"
+            static let sampleCell: String = "SampleCellReuseIdentifier"
         }
     }
 }
@@ -43,3 +43,13 @@ struct NotificationName {
         static let loadRestaurantDetailsResult: String = "loadRestaurantDetailsResult"
     }
 }
+
+/**
+ * ParisLocation
+ */
+struct ParisLocation {
+    static let latitude: Double = 48.8566
+    static let longitude: Double = 2.3522
+}
+
+

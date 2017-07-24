@@ -29,7 +29,7 @@ class RestaurantDetailsPresenter: AbstractPresenter<RestaurantDetailsViewContrac
         
         guard let restaurantDetailsVo: RestaurantDetailsVo = RestaurantConverter.entityToVo(entity: result) else {
             
-            self.delegate?.displayError(error: "common.error")
+            self.delegate?.displayError(error: "common.error".localized)
             return
         }
         

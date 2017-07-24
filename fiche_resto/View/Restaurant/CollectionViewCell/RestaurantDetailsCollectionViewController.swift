@@ -32,6 +32,7 @@ class RestaurantDetailsCollectionViewController: UICollectionViewController, UIC
         self.collectionView?.register(RestaurantDetailsDiaporamaCollectionViewCell.self, forCellWithReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.diaporamaCell)
         self.collectionView?.register(RestaurantDetailsMapCollectionViewCell.self, forCellWithReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.mapCell)
         self.collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.sampleCell)
+        
         self.collectionView?.style(CollectionViewStyle)
         
         self.collectionView?.dataSource = self
@@ -48,21 +49,33 @@ class RestaurantDetailsCollectionViewController: UICollectionViewController, UIC
         super.didReceiveMemoryWarning()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.collectionView?.autoresizingMask = [.flexibleHeight]
+    }
+    
     // MARK: - Style
     func CollectionViewStyle(collectionView: UICollectionView) {
+        
         collectionView.backgroundColor = UIColor.white
     }
     
     // MARK: - Private
     func setInformationCell(indexPath: IndexPath) -> RestaurantDetailsInformationCollectionViewCell? {
+       
         if let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.informationCell, for: indexPath) as? RestaurantDetailsInformationCollectionViewCell {
             
             cell.title.text = self.restaurantDetailVo?.name
-
             cell.address.text = "\((self.restaurantDetailVo?.address ?? "")) \((describing: self.restaurantDetailVo?.zipcode ?? "")) \((self.restaurantDetailVo?.city) ?? "")"
-            cell.avgRate.text = "\((self.restaurantDetailVo?.avgRate?.description ?? "NA"))/10"
-            cell.numberOfRate.text = "\((self.restaurantDetailVo?.rateCount.description ?? "0")) avis LaFourchette"
-            cell.avgPrice.text = "Prix moyen à la carte de ce restaurant: \((self.restaurantDetailVo?.cardPrice?.description ?? "NA"))"
+            
+            let note: String = "\((self.restaurantDetailVo?.avgRate?.description ?? "NA"))\("restaurant.information.note.on.ten".localized)"
+            let range = (note as NSString).range(of: self.restaurantDetailVo?.avgRate?.description ?? "NA")
+            let attrString = NSMutableAttributedString(string: note)
+            attrString.addAttribute(kCTFontAttributeName as String, value: UIFont.boldSystemFont(ofSize: 24), range: range)
+            cell.avgRate.attributedText = attrString
+            
+            cell.numberOfRate.text = "\((self.restaurantDetailVo?.rateCount.description ?? "0")) \("restaurant.information.number.of.rate".localized)"
+            cell.avgPrice.text = "\("restaurant.information.average.price".localized) \((self.restaurantDetailVo?.cardPrice?.cleanValue ?? "NA"))"
             
             return cell
         }
@@ -70,6 +83,7 @@ class RestaurantDetailsCollectionViewController: UICollectionViewController, UIC
     }
     
     func setDiaporamaCell(indexPath: IndexPath) -> RestaurantDetailsDiaporamaCollectionViewCell? {
+       
         if let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.diaporamaCell, for: indexPath) as? RestaurantDetailsDiaporamaCollectionViewCell {
             
             if  self.restaurantDetailVo?.picsMain != nil {
@@ -78,6 +92,7 @@ class RestaurantDetailsCollectionViewController: UICollectionViewController, UIC
                 } else {
                     cell.photo.image = #imageLiteral(resourceName: "placeholder")
                 }
+                cell.delegate = self
             }
             return cell
         }
@@ -85,7 +100,13 @@ class RestaurantDetailsCollectionViewController: UICollectionViewController, UIC
     }
     
     func setMapCell(indexPath: IndexPath) -> RestaurantDetailsMapCollectionViewCell? {
-         return nil
+        
+        if let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: CollectionCell.ReusableIdentifier.Restaurant.mapCell, for: indexPath) as? RestaurantDetailsMapCollectionViewCell {
+            
+            cell.setMapLocation(restaurantDetailsVo: self.restaurantDetailVo!)
+            return cell
+        }
+        return nil
     }
     
 }
@@ -130,15 +151,52 @@ extension RestaurantDetailsCollectionViewController {
     }
 }
 
+// MARK: - RestaurantDetailsDiaporamaCollectionViewCellDelegate
+extension RestaurantDetailsCollectionViewController: RestaurantDetailsDiaporamaCollectionViewCellDelegate {
+   
+    func RestaurantDetailsDiaporamaCollectionViewCellDidTapOnShowMorePictures(_ cell: RestaurantDetailsDiaporamaCollectionViewCell) {
+        // example: swich to view with all the pictures of the restaurant ...
+    }
+}
+
 // MARK: - UICollectionViewDelegate
 extension RestaurantDetailsCollectionViewController {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var cellSize = CGSize(width: collectionView.frame.size.width, height: 80.0)
+        switch indexPath.row {
+        case 0:
+            cellSize = CGSize(width:  collectionView.frame.size.width, height: 200.0)
+        case 1:
+            cellSize = CGSize(width:  collectionView.frame.size.width, height: 150.0)
+        case 2:
+            cellSize = CGSize(width:  collectionView.frame.size.width, height: 300.0)
+        default:
+            return cellSize
+        }
+        return cellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1.0
+    }
 }
 
 // MARK: - RestaurantDetailViewContract
 extension RestaurantDetailsCollectionViewController : RestaurantDetailsViewContract {
     
     func displayError(error: String) {
-        
+        // display error message
     }
     
     func displayRestaurantDetails(restaurantDetailsVo: RestaurantDetailsVo?) {
