@@ -1,0 +1,6 @@
+framework module Pods_fiche_restoUITests {
+  umbrella header "Pods-fiche_restoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

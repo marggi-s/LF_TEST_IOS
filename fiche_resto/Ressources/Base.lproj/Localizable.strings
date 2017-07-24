@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  fiche_resto
+
+  Created by Admin on 20/07/2017.
+  Copyright © 2017 Admin. All rights reserved.
+*/
+
+"common.error" = "something wrong happened please try again later";
